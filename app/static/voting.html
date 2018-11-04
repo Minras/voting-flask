@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1" />
+    <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/voting.css">
+</head>
+<body>
+<h2>Irdeto Art Contest</h2>
+<div style="color: red" th:text="${flash}" />
+<div>Vote for the work you like more than the other one.</div>
+<table>
+    <tr>
+        <td th:each="img: ${images}">
+            <div th:text="${img.getEntity().getName()}" />
+            <img th:src="@{${'data:image/png;base64, ' + img.getBase64Image()}}" alt="" />
+            <br />
+            <a th:href="@{/vote/{workId}(workId=${img.getEntity().getId()})}" class="button">Vote</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
