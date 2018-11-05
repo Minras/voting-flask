@@ -1,0 +1,19 @@
+CREATE TABLE works (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `path` VARCHAR(1024) NOT NULL,
+  `name` VARCHAR(256) NOT NULL,
+  `description` VARCHAR(10240) NOT NULL
+);
+
+CREATE TABLE users (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE user_votes (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT NOT NULL,
+  `work_id` INT NOT NULL,
+  `vote` INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (work_id) REFERENCES works (id)
+);
