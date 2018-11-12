@@ -1,13 +1,18 @@
 import os
-from flask import Flask, send_file
+from flask import Flask, send_file, render_template
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/voting'
+db = SQLAlchemy(app)
 
 
 @app.route("/")
 def main():
-    index_path = os.path.join(app.static_folder, 'voting.html')
-    return send_file(index_path)
+    flash = ""
+    db = get_db()
+    return render_template('voting.html', flash=flash)
 
 
 # Everything not declared before (not a Flask route / API endpoint)...
